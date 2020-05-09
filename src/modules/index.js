@@ -1,9 +1,15 @@
-import { combineReducers } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import rootReducer from './rootReducer'
+import rootSaga from './rootSaga'
 
-import { reducer as postReducer } from './posts'
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
+)
 
-const rootReducer = combineReducers({
-  posts: postReducer,
-})
+sagaMiddleware.run(rootSaga)
 
-export default rootReducer
+export default store

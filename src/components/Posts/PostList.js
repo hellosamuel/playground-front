@@ -1,18 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, Route } from 'react-router-dom'
+import { actions as postsActions } from '../../modules/posts'
 import PostDetail from './PostDetail'
-import usePostList from '../../hooks/posts/usePostList'
 
 function PostList() {
-  const postList = usePostList()
+  const dispatch = useDispatch()
+  const postStore = useSelector(({ posts }) => posts)
+
+  useEffect(() => {
+    dispatch(postsActions.read.allPosts.request())
+  }, [dispatch])
 
   return (
     <div>
-      <h1>PostList</h1>
+      <h2>PostList Contents</h2>
       <ul>
-        {postList.map(item => (
-          <PostDetail key={item} title={item} />
+        {postStore.postList.map(item => (
+          <li key={item}>
+            <Link to={`/posts/${item}`}>{item}</Link>
+          </li>
         ))}
       </ul>
+      <Route exact path="/posts/:item">
+        <PostDetail />
+      </Route>
     </div>
   )
 }

@@ -1,12 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { useParams } from 'react-router-dom'
 
-function PostDetail({ title }) {
-  return <div>{title}</div>
-}
+function PostDetail() {
+  const { item } = useParams()
 
-PostDetail.propTypes = {
-  title: PropTypes.string.isRequired,
+  return (
+    <div>
+      <h3>PostDetail Contents</h3>
+      {item}
+    </div>
+  )
 }
 
 export default PostDetail
