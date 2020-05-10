@@ -5,8 +5,6 @@ class Posts extends Api {
   constructor() {
     super()
     this.baseUrl = `${this.baseUrl}/posts`
-    this.getAllPosts = this.getAllPosts.bind(this)
-    this.getPost = this.getPost.bind(this)
   }
 
   getAllPosts() {

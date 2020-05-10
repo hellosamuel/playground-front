@@ -6,7 +6,7 @@ import PostsApi from '../../api/posts'
 const operations = {
   *getAllPosts() {
     try {
-      const { data } = yield call(PostsApi.getAllPosts)
+      const { data } = yield call([PostsApi, PostsApi.getAllPosts])
       yield put(actions.read.allPosts.success(data))
     } catch (error) {
       console.error(error)
@@ -16,7 +16,7 @@ const operations = {
 
   *getPost({ payload: postId }) {
     try {
-      const { data } = yield call(PostsApi.getPost, postId)
+      const { data } = yield call([PostsApi, PostsApi.getPost], postId)
       yield put(actions.read.post.success(data))
     } catch (error) {
       console.error(error)
