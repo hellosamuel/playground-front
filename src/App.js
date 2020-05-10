@@ -10,7 +10,7 @@ const activeStyle = {
 function App() {
   return (
     <div>
-      <h1>Dashboard</h1>
+      <h1>Main Contents</h1>
       <ul>
         <li>
           <NavLink exact to="/" activeStyle={activeStyle}>

@@ -6,6 +6,8 @@ const constants = {
   READ_POST_REQUEST: 'posts/READ_POST_REQUEST',
   READ_POST_SUCCESS: 'posts/READ_POST_SUCCESS',
   READ_POST_FAILURE: 'posts/READ_POST_FAILURE',
+
+  CLEAR_POSTS_STATE: 'posts/CLEAR_POSTS_STATES',
 }
 
 export default constants

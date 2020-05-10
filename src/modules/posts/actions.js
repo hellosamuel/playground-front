@@ -40,6 +40,13 @@ const actions = {
       },
     },
   },
+  clear: {
+    state() {
+      return {
+        type: constants.CLEAR_POSTS_STATE,
+      }
+    },
+  },
 }
 
 export default actions

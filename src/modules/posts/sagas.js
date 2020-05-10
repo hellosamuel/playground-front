@@ -1,21 +1,23 @@
-import { put, takeEvery } from 'redux-saga/effects'
+import { put, call, takeEvery } from 'redux-saga/effects'
 import constants from './constants'
 import actions from './actions'
+import PostsApi from '../../api/posts'
 
 const operations = {
   *getAllPosts() {
     try {
-      console.log('getAllPosts')
-      yield put(actions.read.allPosts.success())
+      const { data } = yield call(PostsApi.getAllPosts)
+      yield put(actions.read.allPosts.success(data))
     } catch (error) {
       console.error(error)
       yield put(actions.read.allPosts.failure())
     }
   },
-  *getPost() {
+
+  *getPost({ payload: postId }) {
     try {
-      console.log('getPost')
-      yield put(actions.read.post.success())
+      const { data } = yield call(PostsApi.getPost, postId)
+      yield put(actions.read.post.success(data))
     } catch (error) {
       console.error(error)
       yield put(actions.read.post.failure())
