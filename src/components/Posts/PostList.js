@@ -14,9 +14,16 @@ function PostList() {
     return () => dispatch(postsActions.clear.state())
   }, [dispatch])
 
+  const handleDownloadOnclick = () => {
+    dispatch(postsActions.download.request())
+  }
+
   return (
     <div>
       <h2>PostList Contents</h2>
+      <button type="button" onClick={handleDownloadOnclick}>
+        Download
+      </button>
       <ul>
         {postList.map(post => (
           <li key={post.id}>

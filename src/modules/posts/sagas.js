@@ -2,6 +2,7 @@ import { put, call, takeEvery } from 'redux-saga/effects'
 import constants from './constants'
 import actions from './actions'
 import PostsApi from '../../api/posts'
+import csvUtils from '../../utils/csvUtils'
 
 const operations = {
   *getAllPosts() {
@@ -23,11 +24,23 @@ const operations = {
       yield put(actions.read.post.failure())
     }
   },
+
+  *download() {
+    try {
+      const { data } = yield call([PostsApi, PostsApi.getAllPosts])
+      csvUtils.export(data, 'posts.csv')
+      yield put(actions.download.success())
+    } catch (error) {
+      console.error(error)
+      yield put(actions.download.failure())
+    }
+  },
 }
 
 function* postWatcher() {
   yield takeEvery(constants.READ_ALL_POSTS_REQUEST, operations.getAllPosts)
   yield takeEvery(constants.READ_POST_REQUEST, operations.getPost)
+  yield takeEvery(constants.DOWNLOAD_POSTS_REQUEST, operations.download)
 }
 
 export default [postWatcher]

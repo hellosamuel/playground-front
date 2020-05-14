@@ -40,6 +40,23 @@ const actions = {
       },
     },
   },
+  download: {
+    request() {
+      return {
+        type: constants.DOWNLOAD_POSTS_REQUEST,
+      }
+    },
+    success() {
+      return {
+        type: constants.DOWNLOAD_POSTS_SUCCESS,
+      }
+    },
+    failure() {
+      return {
+        type: constants.DOWNLOAD_POSTS_FAILURE,
+      }
+    },
+  },
   clear: {
     state() {
       return {
