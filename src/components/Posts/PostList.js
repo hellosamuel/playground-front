@@ -31,9 +31,7 @@ function PostList() {
           </li>
         ))}
       </ul>
-      <Route exact path="/posts/:postId">
-        <PostDetail />
-      </Route>
+      <Route exact path="/posts/:postId" component={PostDetail} />
     </div>
   )
 }
