@@ -37,10 +37,10 @@ const operations = {
   },
 }
 
-function* postWatcher() {
+function* postSaga() {
   yield takeEvery(constants.READ_ALL_POSTS_REQUEST, operations.getAllPosts)
   yield takeEvery(constants.READ_POST_REQUEST, operations.getPost)
   yield takeEvery(constants.DOWNLOAD_POSTS_REQUEST, operations.download)
 }
 
-export default [postWatcher]
+export default postSaga
