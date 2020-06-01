@@ -1,27 +1,13 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Link, Route } from 'react-router-dom'
-import { actions as postsActions } from '../../modules/posts'
 import PostDetail from './PostDetail'
 
-function PostList() {
-  const dispatch = useDispatch()
-  const { postList } = useSelector(({ posts }) => posts)
-
-  useEffect(() => {
-    dispatch(postsActions.read.allPosts.request())
-
-    return () => dispatch(postsActions.clear.state())
-  }, [dispatch])
-
-  const handleDownloadOnclick = () => {
-    dispatch(postsActions.download.request())
-  }
-
+function PostList({ postList, handleDownloadOnClick }) {
   return (
     <div>
       <h2>PostList Contents</h2>
-      <button type="button" onClick={handleDownloadOnclick}>
+      <button type="button" onClick={handleDownloadOnClick}>
         Download
       </button>
       <ul>
@@ -34,6 +20,11 @@ function PostList() {
       <Route exact path="/posts/:postId" component={PostDetail} />
     </div>
   )
+}
+
+PostList.propTypes = {
+  postList: PropTypes.array.isRequired,
+  handleDownloadOnClick: PropTypes.func.isRequired,
 }
 
 export default PostList

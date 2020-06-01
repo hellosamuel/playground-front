@@ -39,11 +39,11 @@ function MainLayout({ component: PassedComponent }) {
 }
 
 MainLayout.propTypes = {
-  component: PropTypes.object,
+  component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 }
 
 MainLayout.defaultProps = {
-  component: <h2>Something is wrong...</h2>,
+  component: () => <h2>Something is wrong...</h2>,
 }
 
 export default MainLayout
