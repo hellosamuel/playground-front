@@ -25,6 +25,11 @@ function MainMenu() {
           Posts
         </NavLink>
       </li>
+      <li>
+        <NavLink to="/albums" activeStyle={activeStyle}>
+          Albums
+        </NavLink>
+      </li>
     </ul>
   )
 }

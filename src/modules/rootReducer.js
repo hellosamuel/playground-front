@@ -1,11 +1,15 @@
 import { combineReducers } from 'redux'
 
-import { reducer as postsReducer } from './posts'
-import todosReducer from './todos'
+import loading from './loading'
+import todos from './todos'
+import { reducer as posts } from './posts'
+import albums from './albums'
 
 const rootReducer = combineReducers({
-  posts: postsReducer,
-  todos: todosReducer,
+  loading,
+  todos,
+  posts,
+  albums,
 })
 
 export default rootReducer

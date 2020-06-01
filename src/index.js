@@ -5,6 +5,9 @@ import { BrowserRouter } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker'
 import store from './modules'
 import MainRouter from './routers/MainRouter'
+import axiosSetup from './utils/axiosSetup'
+
+axiosSetup()
 
 ReactDOM.render(
   <Provider store={store}>

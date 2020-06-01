@@ -3,6 +3,8 @@ import { Link, Switch, Route } from 'react-router-dom'
 import MainLayout from '../layouts/MainLayout'
 import TodosContainer from '../containers/TodosContainer'
 import PostsContainer from '../containers/PostsContainer'
+import AlbumsListContainer from '../containers/Albums/AlbumsListContainer'
+import AlbumsDetailContainer from '../containers/Albums/AlbumsDetailContainer'
 
 const TitleStyle = {
   textDecoration: 'none',
@@ -24,6 +26,12 @@ function MainRouter() {
         </Route>
         <Route path="/posts">
           <MainLayout component={PostsContainer} />
+        </Route>
+        <Route exact path="/albums">
+          <MainLayout component={AlbumsListContainer} />
+        </Route>
+        <Route exact path="/albums/:albumId">
+          <MainLayout component={AlbumsDetailContainer} />
         </Route>
         <Route path="/">
           <h2>Not Found 404</h2>
