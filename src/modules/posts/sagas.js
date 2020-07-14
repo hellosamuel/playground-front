@@ -1,13 +1,13 @@
 import { put, call, takeEvery } from 'redux-saga/effects'
 import constants from './constants'
 import actions from './actions'
-import PostsApi from '../../api/posts'
-import csvUtils from '../../utils/csvUtils'
+import * as postsAPI from '../../lib/api/posts'
+import csvUtils from '../../lib/csvUtils'
 
 const operations = {
   *getAllPosts() {
     try {
-      const { data } = yield call([PostsApi, PostsApi.getAllPosts])
+      const { data } = yield call(postsAPI.listPosts)
       yield put(actions.read.allPosts.success(data))
     } catch (error) {
       console.error(error)
@@ -17,7 +17,7 @@ const operations = {
 
   *getPost({ payload: postId }) {
     try {
-      const { data } = yield call([PostsApi, PostsApi.getPost], postId)
+      const { data } = yield call(postsAPI.readPost, postId)
       yield put(actions.read.post.success(data))
     } catch (error) {
       console.error(error)
@@ -27,7 +27,7 @@ const operations = {
 
   *download() {
     try {
-      const { data } = yield call([PostsApi, PostsApi.getAllPosts])
+      const { data } = yield call(postsAPI.listPosts)
       csvUtils.export(data, 'posts.csv')
       yield put(actions.download.success())
     } catch (error) {

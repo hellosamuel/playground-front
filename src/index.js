@@ -4,15 +4,12 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker'
 import store from './modules'
-import MainRouter from './routers/MainRouter'
-import axiosSetup from './utils/axiosSetup'
-
-axiosSetup()
+import App from './App'
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <MainRouter />
+      <App />
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')

@@ -11,6 +11,7 @@ export default function useActions(actions, deps) {
       }
       return bindActionCreators(actions, dispatch)
     },
+    // eslint-disable-next-line
     deps ? [dispatch, ...deps] : [dispatch]
   )
 }

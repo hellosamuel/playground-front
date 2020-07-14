@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import PostList from '../components/Posts/PostList'
+import PostList from '../components/posts/PostList'
 import { actions as postsActions } from '../modules/posts'
 
 function PostsContainer() {
