@@ -1,15 +1,22 @@
-import { createStore, applyMiddleware } from 'redux'
-import createSagaMiddleware from 'redux-saga'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import rootReducer from './rootReducer'
-import rootSaga from './rootSaga'
+import { combineReducers } from 'redux'
+import { all } from 'redux-saga/effects'
 
-const sagaMiddleware = createSagaMiddleware()
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(sagaMiddleware))
-)
+import loading from './loading'
+import todos from './todos'
+import auth, { authSaga } from './auth'
+import user, { userSaga } from './user'
+import { reducer as posts, sagas as postsSaga } from './posts'
 
-sagaMiddleware.run(rootSaga)
+const rootReducer = combineReducers({
+  loading,
+  todos,
+  auth,
+  user,
+  posts,
+})
 
-export default store
+export function* rootSaga() {
+  yield all([authSaga(), userSaga(), postsSaga()])
+}
+
+export default rootReducer

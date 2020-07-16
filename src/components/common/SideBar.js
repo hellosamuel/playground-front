@@ -20,9 +20,14 @@ const sideMenu = [
 ]
 
 const styles = {
+  menu: {
+    fontSize: '1.5rem',
+    color: 'black',
+    textDecoration: 'none',
+  },
   active: {
     backgroundColor: 'yellow',
-    textDecoration: 'none',
+    color: 'blue',
   },
 }
 
@@ -36,6 +41,7 @@ function SideBar() {
             <NavLink
               exact={menu.isExact}
               to={menu.to}
+              style={styles.menu}
               activeStyle={styles.active}
             >
               {menu.label}

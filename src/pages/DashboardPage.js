@@ -1,5 +1,6 @@
 import React from 'react'
 import SideBar from '../components/common/SideBar'
+import HeaderContainer from '../containers/common/HeaderContainer'
 
 const styles = {
   container: {
@@ -10,9 +11,12 @@ const styles = {
 
 function DashboardPage() {
   return (
-    <div style={styles.container}>
-      <SideBar />
-      <h2>Dashboard Contents</h2>
+    <div>
+      <HeaderContainer />
+      <div style={styles.container}>
+        <SideBar />
+        <h2>Dashboard Contents</h2>
+      </div>
     </div>
   )
 }

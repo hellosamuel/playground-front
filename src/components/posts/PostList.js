@@ -2,14 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, Route } from 'react-router-dom'
 import PostDetail from './PostDetail'
+import Button from '../common/Button'
 
 function PostList({ postList, handleDownloadOnClick }) {
   return (
     <div>
       <h2>PostList Contents</h2>
-      <button type="button" onClick={handleDownloadOnClick}>
-        Download
-      </button>
+      <Button label="Download" onClick={handleDownloadOnClick} />
       <ul>
         {postList.map(post => (
           <li key={post.id}>

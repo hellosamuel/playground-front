@@ -1,6 +1,6 @@
 import React from 'react'
-import PostListContainer from '../containers/posts/PostListContainer'
 import SideBar from '../components/common/SideBar'
+import RegisterForm from '../containers/auth/RegisterForm'
 import HeaderContainer from '../containers/common/HeaderContainer'
 
 const styles = {
@@ -10,16 +10,16 @@ const styles = {
   },
 }
 
-function PostListPage() {
+function RegisterPage() {
   return (
     <div>
       <HeaderContainer />
       <div style={styles.container}>
         <SideBar />
-        <PostListContainer />
+        <RegisterForm />
       </div>
     </div>
   )
 }
 
-export default PostListPage
+export default RegisterPage

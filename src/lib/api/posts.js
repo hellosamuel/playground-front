@@ -1,4 +1,6 @@
-import client from './client'
+import getClient from './client'
+
+const client = getClient()
 
 export const readPost = id => client.get(`/api/posts/${id}`)
 

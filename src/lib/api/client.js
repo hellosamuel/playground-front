@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const client = axios.create()
+const getClient = config => axios.create(config)
 
 /*
   글로벌 설정 예시:
@@ -22,4 +22,4 @@ const client = axios.create()
   })
 */
 
-export default client
+export default getClient

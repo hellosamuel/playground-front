@@ -1,6 +1,7 @@
 import React from 'react'
-import TodosContainer from '../containers/TodosContainer'
+import TodosContainer from '../containers/todos/TodosContainer'
 import SideBar from '../components/common/SideBar'
+import HeaderContainer from '../containers/common/HeaderContainer'
 
 const styles = {
   container: {
@@ -11,9 +12,12 @@ const styles = {
 
 function TodoListPage() {
   return (
-    <div style={styles.container}>
-      <SideBar />
-      <TodosContainer />
+    <div>
+      <HeaderContainer />
+      <div style={styles.container}>
+        <SideBar />
+        <TodosContainer />
+      </div>
     </div>
   )
 }
