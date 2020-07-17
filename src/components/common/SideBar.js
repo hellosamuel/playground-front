@@ -22,8 +22,6 @@ const sideMenu = [
 const styles = {
   menu: {
     fontSize: '1.5rem',
-    color: 'black',
-    textDecoration: 'none',
   },
   active: {
     backgroundColor: 'yellow',

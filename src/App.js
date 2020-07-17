@@ -13,7 +13,7 @@ function App() {
       <Route component={TodoListPage} path="/todos" />
       <Route component={RegisterPage} path="/register" />
       <Route component={LoginPage} path="/login" />
-      <Route component={PostListPage} path="/posts" />
+      <Route component={PostListPage} path={['/posts/@:username', '/posts']} />
       <Route path="/" render={() => <h2>Not Found 404</h2>} />
     </Switch>
   )

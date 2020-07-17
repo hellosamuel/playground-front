@@ -5,13 +5,15 @@ import * as postsAPI from '../../lib/api/posts'
 import csvUtils from '../../lib/csvUtils'
 
 const operations = {
-  *getAllPosts() {
+  *getAllPosts({ payload: { username, tag, page } }) {
     try {
-      const { data } = yield call(postsAPI.listPosts)
+      const { data } = yield call(postsAPI.listPosts, { username, tag, page })
       yield put(actions.read.allPosts.success(data))
     } catch (error) {
       console.error(error)
-      yield put(actions.read.allPosts.failure())
+      yield put(
+        actions.read.allPosts.failure({ meta: error, res: error.response })
+      )
     }
   },
 

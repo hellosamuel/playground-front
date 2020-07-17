@@ -17,9 +17,10 @@ const styles = {
     width: '100%',
   },
   footer: {
-    marginTop: '1rem',
-    display: 'flex',
-    flexDirection: 'column',
+    marginTop: '2rem',
+    textAlign: 'right',
+    color: 'blue',
+    textDecoration: 'underline',
   },
   messageBox: {
     textAlign: 'center',
@@ -69,15 +70,21 @@ function AuthForm({ type, form, handleChange, onSubmit, error, authRegister }) {
             Thank you for join us!
           </div>
         )}
-        <div style={styles.footer}>
-          <Button type="submit" label={title} color="orange" fullWidth />
-          {!isRegister && (
-            <Link to="/register">
-              <Button label="Register" fullWidth />
-            </Link>
-          )}
-        </div>
+        <Button
+          type="submit"
+          label={title}
+          color="orange"
+          fullWidth
+          styles={{ marginTop: '2rem' }}
+        />
       </form>
+      <div style={styles.footer}>
+        {isRegister ? (
+          <Link to="/login">Login</Link>
+        ) : (
+          <Link to="/register">Register</Link>
+        )}
+      </div>
     </div>
   )
 }

@@ -1,23 +1,17 @@
 import React from 'react'
 import SideBar from '../components/common/SideBar'
 import HeaderContainer from '../containers/common/HeaderContainer'
-
-const styles = {
-  container: {
-    display: 'grid',
-    gridTemplateColumns: '300px auto',
-  },
-}
+import ContentTemplate from '../components/common/ContentTemplate'
 
 function DashboardPage() {
   return (
-    <div>
+    <>
       <HeaderContainer />
-      <div style={styles.container}>
+      <ContentTemplate>
         <SideBar />
         <h2>Dashboard Contents</h2>
-      </div>
-    </div>
+      </ContentTemplate>
+    </>
   )
 }
 

@@ -3,9 +3,10 @@ import constants from './constants'
 const actions = {
   read: {
     allPosts: {
-      request() {
+      request(payload) {
         return {
           type: constants.READ_ALL_POSTS_REQUEST,
+          payload,
         }
       },
       success(payload) {
@@ -14,9 +15,10 @@ const actions = {
           payload,
         }
       },
-      failure() {
+      failure(payload) {
         return {
           type: constants.READ_ALL_POSTS_FAILURE,
+          payload,
         }
       },
     },

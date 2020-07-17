@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import { actions as postsActions } from '../../modules/posts'
@@ -8,13 +8,9 @@ function PostDetail({ match }) {
   const dispatch = useDispatch()
   const { postDetail } = useSelector(({ posts }) => posts)
 
-  const getPostRequest = useCallback(() => {
+  useEffect(() => {
     dispatch(postsActions.read.post.request(postId))
   }, [dispatch, postId])
-
-  useEffect(() => {
-    getPostRequest()
-  }, [getPostRequest])
 
   return postDetail ? (
     <div>
