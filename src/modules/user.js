@@ -15,11 +15,16 @@ export const logout = createAction(LOGOUT)
 
 const checkSaga = createRequestSaga(check, authAPI.check)
 function checkFailureSaga() {
-  console.log('checkFailureSaga')
+  try {
+    localStorage.removeItem('user')
+  } catch (e) {
+    console.log('localStorage Error')
+  }
 }
 function* logoutSaga() {
   try {
     yield call(authAPI.logout)
+    localStorage.removeItem('user')
   } catch (e) {
     console.log(e)
   }

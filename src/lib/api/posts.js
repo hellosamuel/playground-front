@@ -1,7 +1,5 @@
-import getClient from './client'
+import client from './client'
 
-const client = getClient()
+export const readPost = id => client.get(`/posts/${id}`)
 
-export const readPost = id => client.get(`/api/posts/${id}`)
-
-export const listPosts = () => client.get('/api/posts')
+export const listPosts = () => client.get('/posts')

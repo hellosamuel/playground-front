@@ -4,8 +4,9 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 import rootReducer, { rootSaga } from './modules'
+import { check } from './modules/user'
 import * as serviceWorker from './serviceWorker'
 import App from './App'
 
@@ -15,7 +16,19 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(sagaMiddleware))
 )
 
+function loginCheck() {
+  try {
+    const user = localStorage.getItem('user')
+    if (!user) return
+
+    store.dispatch(check())
+  } catch (e) {
+    console.log('localStorage Error')
+  }
+}
+
 sagaMiddleware.run(rootSaga)
+loginCheck()
 
 ReactDOM.render(
   <Provider store={store}>

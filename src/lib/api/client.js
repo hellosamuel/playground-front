@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-const getClient = config => axios.create(config)
-
 /*
   글로벌 설정 예시:
 
@@ -22,4 +20,15 @@ const getClient = config => axios.create(config)
   })
 */
 
-export default getClient
+const client = axios.create({ baseURL: '/api' })
+
+if (process.env.NODE_ENV === 'production') {
+  const {
+    location: { protocol, hostname },
+  } = window
+
+  client.defaults.baseURL = `${protocol}//${hostname}:8000/api`
+  client.defaults.withCredentials = true
+}
+
+export default client

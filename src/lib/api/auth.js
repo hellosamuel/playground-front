@@ -1,13 +1,11 @@
-import getClient from './client'
-
-const client = getClient({ baseURL: '/api/auth' })
+import client from './client'
 
 export const register = ({ username, password }) =>
-  client.post('/register', { username, password })
+  client.post('/auth/register', { username, password })
 
 export const login = ({ username, password }) =>
-  client.post('/login', { username, password })
+  client.post('/auth/login', { username, password })
 
-export const check = () => client.get('/check')
+export const check = () => client.get('/auth/check')
 
-export const logout = () => client.post('/logout')
+export const logout = () => client.post('/auth/logout')
