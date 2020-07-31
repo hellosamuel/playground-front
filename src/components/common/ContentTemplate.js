@@ -5,6 +5,8 @@ const styles = {
   container: {
     display: 'grid',
     gridTemplateColumns: '300px auto',
+    marginLeft: '1rem',
+    marginRight: '1rem',
   },
 }
 

@@ -9,15 +9,13 @@ const styles = {
     justifyContent: 'flex-end',
     marginBottom: '3rem',
   },
-  postListBlock: {
-    marginTop: '3rem',
-    marginRight: '1rem',
-  },
-  postItemBlock: {
-    paddingBottom: '3rem',
-  },
+  postListBlock: { marginTop: '3rem' },
+  postItemBlock: { paddingBottom: '3rem' },
   hrMargin: {
+    height: '1px',
+    border: 'none',
     marginBottom: '3rem',
+    backgroundColor: 'lightgray',
   },
   title: {
     fontSize: '2rem',

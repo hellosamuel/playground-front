@@ -11,6 +11,8 @@ const styles = {
   container: {
     display: 'flex',
     justifyContent: 'space-between',
+    marginLeft: '1rem',
+    marginRight: '1rem',
   },
   buttonWithMarginTop: {
     marginTop: '1rem',

@@ -6,6 +6,7 @@ import { readPost, unloadPost } from '../../modules/post'
 import PostViewer from '../../components/post/PostViwer'
 import PostActionButtons from '../../components/post/PostActionButtons'
 import { removePost } from '../../lib/api/posts'
+import { setOriginalPost } from '../../modules/write'
 
 function PostViewerContainer({ match, history }) {
   const { postId } = match.params
@@ -25,7 +26,8 @@ function PostViewerContainer({ match, history }) {
   }, [dispatch, postId])
 
   const onEdit = () => {
-    console.log('onEdit')
+    dispatch(setOriginalPost(post))
+    history.push('/posts/write')
   }
 
   const onRemove = async () => {

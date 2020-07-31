@@ -6,7 +6,6 @@ const styles = {
     borderBottom: '1px solid lightgray',
     paddingBottom: '3rem',
     marginBottom: '3rem',
-    marginRight: '1rem',
   },
   title: {
     fontSize: '3rem',
@@ -14,10 +13,7 @@ const styles = {
     margin: 0,
   },
   info: { marginRight: '1rem' },
-  content: {
-    marginRight: '1rem',
-    fontSize: '1.3125.rem',
-  },
+  content: { fontSize: '1.3125.rem' },
   tags: {
     marginTop: '0.5rem',
     tag: {
