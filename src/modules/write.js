@@ -21,10 +21,14 @@ const [
 
 export const initialize = createAction(INITIALIZE)
 export const setOriginalPost = createAction(SET_ORIGINAL_POST, post => post)
-export const writePost = createAction(WRITE_POST, ({ key, value }) => ({
-  key,
-  value,
-}))
+export const writePost = createAction(
+  WRITE_POST,
+  ({ title, content, tags }) => ({
+    title,
+    content,
+    tags,
+  })
+)
 export const updatePost = createAction(
   UPDATE_POST,
   ({ id, title, content, tags }) => ({
@@ -43,11 +47,9 @@ export function* writeSaga() {
 }
 
 const initialState = {
-  title: '',
-  content: '',
-  tags: [],
   post: null,
   postError: null,
+  postForEdit: null,
   originalPostId: null,
 }
 
@@ -56,9 +58,11 @@ const write = handleActions(
     [INITIALIZE]: () => initialState,
     [SET_ORIGINAL_POST]: (state, { payload: post }) =>
       produce(state, draft => {
-        draft.title = post.title
-        draft.content = post.content
-        draft.tags = post.tags
+        draft.postForEdit = {
+          title: post.title,
+          content: post.content,
+          tags: post.tags,
+        }
         draft.originalPostId = post.id
       }),
     [WRITE_POST]: state =>
