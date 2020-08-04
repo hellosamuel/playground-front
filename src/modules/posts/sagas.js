@@ -7,8 +7,13 @@ import csvUtils from '../../lib/csvUtils'
 const operations = {
   *getAllPosts({ payload: { username, tag, page } }) {
     try {
-      const { data } = yield call(postsAPI.listPosts, { username, tag, page })
-      yield put(actions.read.allPosts.success(data))
+      const response = yield call(postsAPI.listPosts, { username, tag, page })
+      yield put(
+        actions.read.allPosts.success({
+          data: response.data,
+          lastPage: parseInt(response.headers['last-page'], 10),
+        })
+      )
     } catch (error) {
       console.error(error)
       yield put(

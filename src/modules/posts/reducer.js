@@ -15,7 +15,12 @@ const reducer = (state = initialState, { type, payload }) => {
     case constants.DOWNLOAD_POSTS_REQUEST:
       return { ...state, loading: true }
     case constants.READ_ALL_POSTS_SUCCESS:
-      return { ...state, posts: payload, loading: false }
+      return {
+        ...state,
+        posts: payload.data,
+        lastPage: payload.lastPage,
+        loading: false,
+      }
     case constants.READ_POST_SUCCESS:
       return { ...state, post: payload, loading: false }
     case constants.DOWNLOAD_POSTS_SUCCESS:

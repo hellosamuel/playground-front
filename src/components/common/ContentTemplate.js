@@ -5,6 +5,7 @@ const styles = {
   container: {
     display: 'grid',
     gridTemplateColumns: '300px auto',
+    gridTemplateAreas: `"side content" "side footer"`,
     marginLeft: '1rem',
     marginRight: '1rem',
   },

@@ -16,10 +16,15 @@ function getStyles(color, fullWidth, styles) {
   }
 }
 
-function Button({ type, label, color, fullWidth, onClick, styles }) {
+function Button({ type, label, color, fullWidth, onClick, styles, disable }) {
   const buttonStyle = getStyles(color, fullWidth, styles)
   return (
-    <button type={type} style={buttonStyle} onClick={onClick}>
+    <button
+      type={type}
+      style={buttonStyle}
+      onClick={onClick}
+      disabled={disable}
+    >
       {label}
     </button>
   )
@@ -32,6 +37,7 @@ Button.propTypes = {
   fullWidth: PropTypes.bool,
   onClick: PropTypes.func,
   styles: PropTypes.object,
+  disable: PropTypes.bool,
 }
 
 Button.defaultProps = {
@@ -40,6 +46,7 @@ Button.defaultProps = {
   fullWidth: false,
   onClick: () => {},
   styles: {},
+  disable: false,
 }
 
 export default Button
