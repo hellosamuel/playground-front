@@ -1,4 +1,4 @@
-import { put, call, takeEvery } from 'redux-saga/effects'
+import { put, call, takeEvery, select } from 'redux-saga/effects'
 import constants from './constants'
 import actions from './actions'
 import * as postsAPI from '../../lib/api/posts'
@@ -34,8 +34,18 @@ const operations = {
 
   *download() {
     try {
-      const { data } = yield call(postsAPI.listPosts)
-      csvUtils.export(data, 'posts.csv')
+      const data = yield select(({ posts }) => posts.posts)
+      const exportData = data.map(row => {
+        const post = {
+          ...row,
+          author: row.Author.username,
+        }
+        delete post.userId
+        delete post.Author
+
+        return post
+      })
+      csvUtils.export(exportData, 'posts.csv')
       yield put(actions.download.success())
     } catch (error) {
       console.error(error)
