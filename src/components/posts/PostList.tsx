@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Post } from '../../modules/post'
 import Button from '../common/Button'
 
 const styles = {
@@ -31,7 +32,7 @@ const styles = {
   },
 }
 
-function PostItem({ post }) {
+function PostItem({ post }: { post: Post }) {
   const { createdAt, Author, tags, title, content, id } = post
   return (
     <div style={styles.postItemBlock}>
@@ -56,7 +57,20 @@ function PostItem({ post }) {
   )
 }
 
-function PostList({ postList, error, loading, showWriteBtn, handleDownloadOnClick }) {
+interface PostListProps {
+  postList: Post[]
+  error: boolean
+  loading: boolean
+  showWriteBtn: boolean
+  handleDownloadOnClick: () => void
+}
+function PostList({
+  postList,
+  error,
+  loading,
+  showWriteBtn,
+  handleDownloadOnClick,
+}: PostListProps) {
   if (loading) {
     return <p>Loading...</p>
   }

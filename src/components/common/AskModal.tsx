@@ -1,7 +1,9 @@
 import React from 'react'
 import Button from './Button'
 
-const styles = {
+const styles: {
+  [name: string]: React.CSSProperties
+} = {
   fullScreen: {
     position: 'fixed',
     zIndex: 30,
@@ -33,6 +35,16 @@ const styles = {
     justifyContent: 'flex-end',
   },
 }
+
+interface AskModalProps {
+  visible: boolean
+  title: string
+  description: string
+  confirmText: string
+  cancelText?: string
+  onConfirm: () => void
+  onCancel: () => void
+}
 function AskModal({
   visible,
   title,
@@ -41,7 +53,7 @@ function AskModal({
   cancelText = 'Cancel',
   onConfirm,
   onCancel,
-}) {
+}: AskModalProps) {
   if (!visible) return null
   return (
     <div style={styles.fullScreen}>

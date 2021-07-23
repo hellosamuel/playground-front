@@ -18,7 +18,13 @@ const styles = {
   },
 }
 
-function Header({ userInfo, onLogout }) {
+interface HeaderProps {
+  userInfo: {
+    username: string
+  }
+  onLogout: () => void
+}
+function Header({ userInfo, onLogout }: HeaderProps) {
   return (
     <div style={styles.container}>
       <div>

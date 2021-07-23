@@ -18,7 +18,7 @@ function EditorContainer({ history }) {
     tags: (postForEdit && postForEdit.tags) || [],
   })
 
-  const handleChange = useCallback((e) => {
+  const handleChange = useCallback((e: { target: { name: string; value: string | string[] } }) => {
     const { name, value } = e.target
     setWriteForm((prevForm) => ({ ...prevForm, [name]: value }))
   }, [])

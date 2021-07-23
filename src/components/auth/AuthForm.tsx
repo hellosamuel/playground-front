@@ -2,7 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../common/Button'
 
-const styles = {
+const styles: {
+  [name: string]: React.CSSProperties
+} = {
   root: {
     width: '480px',
   },
@@ -28,7 +30,20 @@ const styles = {
   },
 }
 
-function AuthForm({ type, form, handleChange, onSubmit, error, authRegister }) {
+interface AuthFormProps {
+  type: 'login' | 'register'
+  form: {
+    username: string
+    password: string
+    passwordConfirm?: string
+  }
+  handleChange: () => void
+  onSubmit: () => void
+  error: string | null
+  authRegister: boolean
+}
+
+function AuthForm({ type, form, handleChange, onSubmit, error, authRegister }: AuthFormProps) {
   const [isRegister, title] = type === 'register' ? [true, 'Register'] : [false, 'Login']
 
   return (

@@ -1,5 +1,7 @@
+/* eslint-disable react/no-danger */
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Post } from '../../modules/post'
 
 const styles = {
   head: {
@@ -23,7 +25,13 @@ const styles = {
   },
 }
 
-function PostViewer({ post, error, loading, actionButtons }) {
+interface PostViewerProps {
+  post: Post
+  error: boolean
+  loading: boolean
+  actionButtons: false | JSX.Element
+}
+function PostViewer({ post, error, loading, actionButtons }: PostViewerProps) {
   if (error) {
     return <h1>Error Occur!</h1>
   }

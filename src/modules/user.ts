@@ -31,6 +31,10 @@ export function* userSaga() {
   yield takeLatest(LOGOUT, logoutSaga)
 }
 
+export interface User {
+  username: string
+}
+
 const initialState = {
   user: null,
   checkError: null,
