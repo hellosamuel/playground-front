@@ -1,7 +1,12 @@
 import React from 'react'
 import AskModal from '../common/AskModal'
 
-function AskRemoveModal({ visible, onConfirm, onCancel }) {
+interface AskRemoveModalProps {
+  visible: boolean
+  onConfirm: () => void
+  onCancel: () => void
+}
+function AskRemoveModal({ visible, onConfirm, onCancel }: AskRemoveModalProps) {
   return (
     <AskModal
       visible={visible}

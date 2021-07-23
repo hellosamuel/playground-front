@@ -18,6 +18,11 @@ export const insert = createAction(INSERT, (text) => {
 export const toggle = createAction(TOGGLE, (id) => id)
 export const remove = createAction(REMOVE, (id) => id)
 
+export interface Todo {
+  id: number
+  text: string
+  done: boolean
+}
 const initialState = {
   input: '',
   todos: [

@@ -50,6 +50,7 @@ module.exports = {
       { props: true, ignorePropertyModificationsFor: ['state', 'draft'] },
     ],
     'react/prop-types': 'off',
+    'react/require-default-props': 'off',
     '@typescript-eslint/no-shadow': 'off',
   },
 }

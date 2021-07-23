@@ -16,14 +16,14 @@ function RegisterForm() {
     password: '',
     passwordConfirm: '',
   })
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null)
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget
     setRegisterForm({ ...registerForm, [name]: value.trim() })
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
     const { username, password, passwordConfirm } = registerForm
     if ([username, password, passwordConfirm].includes('')) {

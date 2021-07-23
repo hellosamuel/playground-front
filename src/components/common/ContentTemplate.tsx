@@ -10,7 +10,10 @@ const styles = {
   },
 }
 
-function ContentTemplate({ children }) {
+interface ContentTemplateProps {
+  children: React.ReactNode
+}
+function ContentTemplate({ children }: ContentTemplateProps) {
   return <div style={styles.container}>{children}</div>
 }
 

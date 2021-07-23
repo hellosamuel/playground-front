@@ -9,7 +9,12 @@ const styles = {
     marginBottom: '2rem',
   },
 }
-function PostActionButtons({ onEdit, onRemove }) {
+
+interface PostActionButtonsProps {
+  onEdit: () => void
+  onRemove: () => void
+}
+function PostActionButtons({ onEdit, onRemove }: PostActionButtonsProps) {
   const [modal, setModal] = useState(false)
   const onRemoveClick = () => {
     setModal(true)

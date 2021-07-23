@@ -1,6 +1,6 @@
 import React from 'react'
 
-function getStyles(color, fullWidth, styles) {
+function getStyles(color: string | undefined, fullWidth: boolean, styles: React.CSSProperties) {
   return {
     // marginRight: '1rem',
     marginLeft: '1rem',
@@ -15,7 +15,22 @@ function getStyles(color, fullWidth, styles) {
   }
 }
 
-function Button({ type, label, color, fullWidth, onClick, styles, disable }) {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  label: string
+  color?: string
+  fullWidth?: boolean
+  styles?: React.CSSProperties
+  disable?: React.ButtonHTMLAttributes<HTMLButtonElement>['disabled']
+}
+function Button({
+  type,
+  label,
+  color,
+  fullWidth = false,
+  onClick,
+  styles = {},
+  disable,
+}: ButtonProps) {
   const buttonStyle = getStyles(color, fullWidth, styles)
   return (
     <button type={type} style={buttonStyle} onClick={onClick} disabled={disable}>

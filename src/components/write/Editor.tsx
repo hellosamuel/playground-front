@@ -4,7 +4,9 @@ import 'quill/dist/quill.bubble.css'
 import './Editor.css'
 import Button from '../common/Button'
 
-const styles = {
+const styles: {
+  [name: string]: React.CSSProperties
+} = {
   editorBlock: {
     paddingTop: '5rem',
     paddingBottom: '5rem',
@@ -22,10 +24,10 @@ const styles = {
     width: '100%',
     borderTop: '1px solid lightgray',
     paddingTop: '2rem',
-    tag: {
-      marginTop: 0,
-      marginBottom: '0.5rem',
-    },
+  },
+  tagInTagBoxBlock: {
+    marginTop: 0,
+    marginBottom: '0.5rem',
   },
   tagForm: {
     borderRadius: '4px',
@@ -33,24 +35,24 @@ const styles = {
     display: 'flex',
     width: '256px',
     border: '1px solid darkgray',
-    input: {
-      outline: 'none',
-      border: 'none',
-      fontSize: '1rem',
-      padding: '0.5rem',
-      flex: 1,
-    },
-    button: {
-      outline: 'none',
-      border: 'none',
-      fontSize: '1rem',
-      cursor: 'pointer',
-      paddingRight: '1rem',
-      paddingLeft: '1rem',
-      backgroundColor: 'darkgray',
-      color: 'white',
-      fontWeight: 'bold',
-    },
+  },
+  inputInTagForm: {
+    outline: 'none',
+    border: 'none',
+    fontSize: '1rem',
+    padding: '0.5rem',
+    flex: 1,
+  },
+  buttonInTagForm: {
+    outline: 'none',
+    border: 'none',
+    fontSize: '1rem',
+    cursor: 'pointer',
+    paddingRight: '1rem',
+    paddingLeft: '1rem',
+    backgroundColor: 'darkgray',
+    color: 'white',
+    fontWeight: 'bold',
   },
   tagListBlock: {
     display: 'flex',
@@ -67,28 +69,44 @@ const styles = {
   },
 }
 
-const TagItem = React.memo(({ tag, onRemove }) => (
-  <div style={styles.tag} onClick={() => onRemove(tag)}>
-    #{tag}
-  </div>
-))
+const TagItem = React.memo(
+  ({ tag, onRemove }: { tag: string; onRemove: (tag: string) => void }) => (
+    <div style={styles.tag} onClick={() => onRemove(tag)}>
+      #{tag}
+    </div>
+  )
+)
 
-const TagList = React.memo(({ tags, onRemove }) => (
-  <div style={styles.tagListBlock}>
-    {tags.map((tag) => (
-      <TagItem key={tag} tag={tag} onRemove={onRemove} />
-    ))}
-  </div>
-))
+const TagList = React.memo(
+  ({ tags, onRemove }: { tags: string[]; onRemove: (tag: string) => void }) => (
+    <div style={styles.tagListBlock}>
+      {tags.map((tag) => (
+        <TagItem key={tag} tag={tag} onRemove={onRemove} />
+      ))}
+    </div>
+  )
+)
 
-function Editor({ form, handleChange, onPublish, onCancel }) {
+interface EditorProps {
+  form: {
+    title: string
+    content: string
+    tags: string[]
+  }
+  handleChange: (param: { target: { name: string; value: string | string[] } }) => void
+  onPublish: () => void
+  onCancel: () => void
+}
+function Editor({ form, handleChange, onPublish, onCancel }: EditorProps) {
   const [input, setInput] = useState('')
   const [localTags, setLocalTags] = useState(form.tags || [])
 
-  const quillElement = useRef(null)
-  const quillInstance = useRef(null)
+  const quillElement = useRef<HTMLDivElement>(null)
+  const quillInstance = useRef<Quill | null>(null)
 
   useEffect(() => {
+    if (!quillElement.current) return
+
     quillInstance.current = new Quill(quillElement.current, {
       theme: 'bubble',
       placeholder: 'Write down your content...',
@@ -116,7 +134,9 @@ function Editor({ form, handleChange, onPublish, onCancel }) {
   useEffect(() => {
     if (mounted.current) return
     mounted.current = true
-    quillInstance.current.root.innerHTML = form.content
+    if (quillInstance.current) {
+      quillInstance.current.root.innerHTML = form.content
+    }
   }, [form.content])
 
   const onChange = useCallback((e) => {
@@ -166,15 +186,15 @@ function Editor({ form, handleChange, onPublish, onCancel }) {
         </div>
       </div>
       <div style={styles.tagBoxBlock}>
-        <h4 style={styles.tagBoxBlock.tag}>Tags</h4>
+        <h4 style={styles.tagInTagBoxBlock}>Tags</h4>
         <form style={styles.tagForm} onSubmit={onSubmit}>
           <input
-            style={styles.tagForm.input}
+            style={styles.inputInTagForm}
             placeholder="Enter Tag..."
             value={input}
             onChange={onChange}
           />
-          <button style={styles.tagForm.button} type="submit">
+          <button style={styles.buttonInTagForm} type="submit">
             Add
           </button>
         </form>

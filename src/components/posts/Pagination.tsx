@@ -14,12 +14,19 @@ const styles = {
   },
 }
 
-const buildLink = ({ username, tag, page }) => {
+type BuildLinkKey = 'username' | 'tag' | 'page'
+const buildLink = ({ username, tag, page }: Pick<PaginationProps, BuildLinkKey>) => {
   const query = qs.stringify({ tag, page })
   return username ? `/posts/@${username}?${query}` : `/posts/?${query}`
 }
 
-function Pagination({ page, lastPage, username, tag }) {
+interface PaginationProps {
+  page: number
+  lastPage: number
+  username: string
+  tag: string
+}
+function Pagination({ page, lastPage, username, tag }: PaginationProps) {
   return (
     <div style={styles.paginationBlock}>
       <Link to={page === 1 ? '#' : buildLink({ username, tag, page: page - 1 })}>

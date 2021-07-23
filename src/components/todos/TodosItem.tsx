@@ -1,6 +1,12 @@
 import React from 'react'
+import { Todo } from '../../modules/todos'
 
-function TodosItem({ todo, onToggle, onRemove }) {
+interface TodosItemProps {
+  todo: Todo
+  onToggle: (id: number) => void
+  onRemove: (id: number) => void
+}
+function TodosItem({ todo, onToggle, onRemove }: TodosItemProps) {
   return (
     <div>
       <input type="checkbox" checked={todo.done} onClick={() => onToggle(todo.id)} readOnly />

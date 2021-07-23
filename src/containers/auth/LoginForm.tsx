@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { initialize, login } from '../../modules/auth'
 import { check } from '../../modules/user'
 import AuthForm from '../../components/auth/AuthForm'
 
-function LoginForm({ history }) {
+function LoginForm({ history }: { history: RouteComponentProps['history'] }) {
   const dispatch = useDispatch()
   const { authLogin, authRegister, authError, userInfo } = useSelector(({ auth, user }) => ({
     authLogin: auth.authLogin,
@@ -19,12 +19,12 @@ function LoginForm({ history }) {
   })
   const [error, setError] = useState(null)
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget
     setLoginForm({ ...loginForm, [name]: value })
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
     const { username, password } = loginForm
     dispatch(login({ username, password }))

@@ -34,7 +34,7 @@ const auth = handleActions(
     [INITIALIZE]: () => initialState,
     [REGISTER_SUCCESS]: (state, { payload: authRegister }) =>
       produce(state, (draft) => {
-        draft.authRegister = authRegister
+        draft.authRegister = !!authRegister
         draft.authError = null
       }),
     [REGISTER_FAILURE]: (state, { payload: error }) =>
