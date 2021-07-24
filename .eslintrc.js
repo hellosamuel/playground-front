@@ -52,5 +52,6 @@ module.exports = {
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
     '@typescript-eslint/no-shadow': 'off',
+    'import/no-cycle': 'off',
   },
 }

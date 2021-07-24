@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import qs from 'querystring'
 import PostList from '../../components/posts/PostList'
-import { actions as postsActions } from '../../modules/posts'
+import { readAllPosts, downloadPosts } from '../../modules/posts'
 
 function PostsContainer({ location, match }) {
   const dispatch = useDispatch()
@@ -18,11 +18,11 @@ function PostsContainer({ location, match }) {
     const { username } = match.params
     const { tag, page } = qs.parse(location.search.slice(1))
 
-    dispatch(postsActions.read.allPosts.request({ username, tag, page }))
+    dispatch(readAllPosts({ username, tag, page }))
   }, [dispatch, match.params, location.search])
 
   const handleDownloadOnClick = () => {
-    dispatch(postsActions.download.request())
+    dispatch(downloadPosts())
   }
 
   return (

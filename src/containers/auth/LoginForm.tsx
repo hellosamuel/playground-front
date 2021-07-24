@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { initialize, login } from '../../modules/auth'
-import { check } from '../../modules/user'
+import { initialize, login } from '../../modules/auth/slice'
+import { check } from '../../modules/user/slice'
 import AuthForm from '../../components/auth/AuthForm'
 
 function LoginForm({ history }: { history: RouteComponentProps['history'] }) {
