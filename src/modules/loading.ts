@@ -1,25 +1,23 @@
-import { createAction, handleActions } from 'redux-actions'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const START_LOADING = 'loading/START_LOADING'
-const FINISH_LOADING = 'loading/FINISH_LOADING'
+interface LoadingState {
+  [requestType: string]: boolean
+}
+const initialState: LoadingState = {}
 
-export const startLoading = createAction(START_LOADING, (requestType) => requestType)
-export const finishLoading = createAction(FINISH_LOADING, (requestType) => requestType)
-
-const initialState = {}
-
-const loadingReducer = handleActions(
-  {
-    [START_LOADING]: (state, { payload: requestType }) => ({
-      ...state,
-      [requestType]: true,
-    }),
-    [FINISH_LOADING]: (state, { payload: requestType }) => ({
-      ...state,
-      [requestType]: false,
-    }),
+const slice = createSlice({
+  name: 'loading',
+  initialState,
+  reducers: {
+    startLoading(state, action: PayloadAction<string>) {
+      state[action.payload] = true
+    },
+    finishLoading(state, action: PayloadAction<string>) {
+      state[action.payload] = true
+    },
   },
-  initialState
-)
+})
 
-export default loadingReducer
+export const LOADING = slice.name
+export const { startLoading, finishLoading } = slice.actions
+export default slice.reducer

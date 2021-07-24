@@ -1,26 +1,43 @@
-import { combineReducers } from 'redux'
+import createSagaMiddleware from 'redux-saga'
 import { all } from 'redux-saga/effects'
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
 
-import loading from './loading'
-import todos from './todos'
-import auth, { authSaga } from './auth'
-import user, { userSaga } from './user'
-import { reducer as posts, sagas as postsSaga } from './posts'
-import post, { postSaga } from './post'
-import write, { writeSaga } from './write'
+import loading, { LOADING } from './loading'
+import todos, { TODOS } from './todos'
+import auth, { AUTH, authSaga } from './auth'
+import user, { USER, userSaga } from './user'
+import posts, { POSTS, postsSaga } from './posts'
+import post, { POST, postSaga } from './post'
+import write, { WRITE, writeSaga } from './write'
 
-const rootReducer = combineReducers({
-  loading,
-  todos,
-  auth,
-  user,
-  posts,
-  post,
-  write,
+export const rootReducer = combineReducers({
+  [LOADING]: loading,
+  [TODOS]: todos,
+  [AUTH]: auth,
+  [USER]: user,
+  [POSTS]: posts,
+  [POST]: post,
+  [WRITE]: write,
 })
 
-export function* rootSaga() {
+function* rootSaga() {
   yield all([authSaga(), userSaga(), postsSaga(), postSaga(), writeSaga()])
 }
 
-export default rootReducer
+const createStore = () => {
+  const devMode = process.env.NODE_ENV === 'development'
+  const sagaMiddleware = createSagaMiddleware()
+  const store = configureStore({
+    reducer: rootReducer,
+    middleware: [sagaMiddleware],
+    devTools: devMode,
+  })
+
+  sagaMiddleware.run(rootSaga)
+
+  return store
+}
+
+export type RootState = ReturnType<typeof rootReducer>
+
+export default createStore

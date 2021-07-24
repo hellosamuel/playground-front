@@ -3,16 +3,12 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import { createStore, applyMiddleware } from 'redux'
-import createSagaMiddleware from 'redux-saga'
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
-import rootReducer, { rootSaga } from './modules'
-import { check } from './modules/user'
+import createStore from './modules'
+import { check } from './modules/user/slice'
 import * as serviceWorker from './serviceWorker'
 import App from './App'
 
-const sagaMiddleware = createSagaMiddleware()
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
+const store = createStore()
 
 function loginCheck() {
   try {
@@ -25,7 +21,6 @@ function loginCheck() {
   }
 }
 
-sagaMiddleware.run(rootSaga)
 loginCheck()
 
 ReactDOM.render(

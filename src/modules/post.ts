@@ -1,19 +1,9 @@
-import { createAction, handleActions } from 'redux-actions'
-import { takeLatest } from 'redux-saga/effects'
-import createRequestSaga, { createRequestActionTypes } from '../lib/createRequestSaga'
+import { call, put, takeLatest } from 'redux-saga/effects'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { AxiosError, AxiosResponse } from 'axios'
+import { startLoading, finishLoading } from './loading'
 import * as postsAPI from '../lib/api/posts'
 import { User } from './user'
-
-const [READ_POST, READ_POST_SUCCESS, READ_POST_FAILURE] = createRequestActionTypes('post/READ_POST')
-const UNLOAD_POST = 'post/UNLOAD_POST'
-
-export const readPost = createAction(READ_POST, (id) => id)
-export const unloadPost = createAction(UNLOAD_POST)
-
-const readPostSaga = createRequestSaga(READ_POST, postsAPI.readPost)
-export function* postSaga() {
-  yield takeLatest(READ_POST, readPostSaga)
-}
 
 export interface Post {
   id: number
@@ -21,27 +11,56 @@ export interface Post {
   content: string
   tags: string[]
   createdAt: string
-  Author: User
+  userId?: number
+  Author?: User
 }
 
-const initialState = {
+type PostReadPostResponse = AxiosResponse<Post>
+
+interface PostState {
+  post: Post | null
+  error: AxiosError | null
+}
+
+const initialState: PostState = {
   post: null,
-  error: false,
+  error: null,
 }
 
-const post = handleActions(
-  {
-    [READ_POST_SUCCESS]: (state, { payload: post }) => ({
-      ...state,
-      post,
-    }),
-    [READ_POST_FAILURE]: (state, { payload: error }) => ({
-      ...state,
-      error: !!error,
-    }),
-    [UNLOAD_POST]: () => initialState,
+const slice = createSlice({
+  name: 'post',
+  initialState,
+  reducers: {
+    readPost() {},
+    readPostSuccess(state, action: PayloadAction<PostReadPostResponse>) {
+      state.post = action.payload.data
+    },
+    readPostFailure(state, action: PayloadAction<AxiosError>) {
+      state.error = action.payload
+    },
+    unloadPost() {
+      return initialState
+    },
   },
-  initialState
-)
+})
 
-export default post
+export const POST = slice.name
+export const { readPost, readPostSuccess, readPostFailure, unloadPost } = slice.actions
+export default slice.reducer
+
+function* readPostSaga(action: PayloadAction<number>) {
+  yield put(startLoading(readPost.type))
+
+  try {
+    const response: PostReadPostResponse = yield call(postsAPI.readPost, action.payload)
+    yield put(readPostSuccess(response))
+  } catch (err) {
+    yield put(readPostFailure(err))
+  }
+
+  yield put(finishLoading(readPost.type))
+}
+
+export function* postSaga() {
+  yield takeLatest(readPost.type, readPostSaga)
+}
