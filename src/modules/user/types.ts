@@ -1,6 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios'
 
 export interface User {
+  id: number
   username: string
 }
 

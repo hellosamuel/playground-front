@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { AuthState } from '../../modules/auth'
 import Button from '../common/Button'
 
 const styles: {
@@ -37,10 +38,10 @@ interface AuthFormProps {
     password: string
     passwordConfirm?: string
   }
-  handleChange: () => void
-  onSubmit: () => void
+  handleChange: (e: React.FormEvent<HTMLInputElement>) => void
+  onSubmit: (e: React.SyntheticEvent) => void
   error: string | null
-  authRegister: boolean
+  authRegister?: AuthState['authRegister']
 }
 
 function AuthForm({ type, form, handleChange, onSubmit, error, authRegister }: AuthFormProps) {

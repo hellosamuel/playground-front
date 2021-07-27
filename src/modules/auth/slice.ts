@@ -1,6 +1,12 @@
 import { AxiosError } from 'axios'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { AuthState, AuthRegisterResponse, AuthLoginResponse } from './types'
+import {
+  AuthState,
+  AuthRegisterResponse,
+  AuthLoginResponse,
+  AuthLoginPayload,
+  AuthRegisterPayload,
+} from './types'
 
 const initialState: AuthState = {
   authRegister: null,
@@ -15,7 +21,7 @@ const slice = createSlice({
     initialize() {
       return initialState
     },
-    register() {},
+    register(_state, _action: PayloadAction<AuthRegisterPayload>) {},
     registerSuccess(state, action: PayloadAction<AuthRegisterResponse>) {
       state.authRegister = action.payload.data
       state.authError = null
@@ -23,7 +29,7 @@ const slice = createSlice({
     registerFailure(state, action: PayloadAction<AxiosError>) {
       state.authError = action.payload
     },
-    login() {},
+    login(_state, _action: PayloadAction<AuthLoginPayload>) {},
     loginSuccess(state, action: PayloadAction<AuthLoginResponse>) {
       state.authRegister = action.payload.data
       state.authError = null

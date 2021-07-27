@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { UserState } from '../../modules/user'
 import Button from './Button'
 
 const styles = {
@@ -19,9 +20,7 @@ const styles = {
 }
 
 interface HeaderProps {
-  userInfo: {
-    username: string
-  }
+  userInfo: UserState['user']
   onLogout: () => void
 }
 function Header({ userInfo, onLogout }: HeaderProps) {

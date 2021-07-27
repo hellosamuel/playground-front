@@ -28,7 +28,7 @@ const initialState: TodosState = {
 
 let newId = 3
 const slice = createSlice({
-  name: 'todo',
+  name: 'todos',
   initialState,
   reducers: {
     changeInput(state, action: PayloadAction<string>) {

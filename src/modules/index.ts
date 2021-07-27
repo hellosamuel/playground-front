@@ -24,20 +24,16 @@ function* rootSaga() {
   yield all([authSaga(), userSaga(), postsSaga(), postSaga(), writeSaga()])
 }
 
-const createStore = () => {
-  const devMode = process.env.NODE_ENV === 'development'
-  const sagaMiddleware = createSagaMiddleware()
-  const store = configureStore({
-    reducer: rootReducer,
-    middleware: [sagaMiddleware],
-    devTools: devMode,
-  })
+const devMode = process.env.NODE_ENV === 'development'
+const sagaMiddleware = createSagaMiddleware()
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: [sagaMiddleware],
+  devTools: devMode,
+})
 
-  sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga)
 
-  return store
-}
-
-export type RootState = ReturnType<typeof rootReducer>
-
-export default createStore
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+export default store

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { register } from '../../modules/auth/slice'
 import AuthForm from '../../components/auth/AuthForm'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 
 function RegisterForm() {
-  const dispatch = useDispatch()
-  const { authRegister, authError } = useSelector(({ auth }) => ({
+  const dispatch = useAppDispatch()
+  const { authRegister, authError } = useAppSelector(({ auth }) => ({
     authRegister: auth.authRegister,
     authError: auth.authError,
   }))
@@ -41,7 +41,7 @@ function RegisterForm() {
 
   useEffect(() => {
     if (authError) {
-      if (authError.response.status === 409) {
+      if (authError.response?.status === 409) {
         setError(authError.response.data)
         return
       }

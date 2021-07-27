@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { initialize, login } from '../../modules/auth/slice'
 import { check } from '../../modules/user/slice'
 import AuthForm from '../../components/auth/AuthForm'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 
 function LoginForm({ history }: { history: RouteComponentProps['history'] }) {
-  const dispatch = useDispatch()
-  const { authLogin, authRegister, authError, userInfo } = useSelector(({ auth, user }) => ({
+  const dispatch = useAppDispatch()
+  const { authLogin, authRegister, authError, userInfo } = useAppSelector(({ auth, user }) => ({
     authLogin: auth.authLogin,
     authRegister: auth.authRegister,
     authError: auth.authError,
     userInfo: user.user,
   }))
+
   const [loginForm, setLoginForm] = useState({
     username: '',
     password: '',
@@ -30,11 +31,16 @@ function LoginForm({ history }: { history: RouteComponentProps['history'] }) {
     dispatch(login({ username, password }))
   }
 
-  useEffect(() => () => dispatch(initialize()), [dispatch])
+  useEffect(
+    () => () => {
+      dispatch(initialize())
+    },
+    [dispatch]
+  )
 
   useEffect(() => {
     if (authError) {
-      setError(authError.response.data)
+      setError(authError.response?.data)
       return
     }
 
