@@ -2,6 +2,7 @@ import { AxiosError, AxiosResponse } from 'axios'
 import { Post } from '../post'
 
 export type WritePostPayload = Pick<Post, 'title' | 'content' | 'tags'>
+export type UpdatePostPayload = Pick<Post, 'id' | 'title' | 'content' | 'tags'>
 
 export type WritePostResponse = AxiosResponse<Post>
 export type UpdatePostResponse = AxiosResponse<Post>

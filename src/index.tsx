@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
-import createStore from './modules'
+import store from './modules'
 import { check } from './modules/user/slice'
 import * as serviceWorker from './serviceWorker'
 import App from './App'
-
-const store = createStore()
 
 function loginCheck() {
   try {

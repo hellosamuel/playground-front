@@ -1,13 +1,13 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../modules/user/slice'
 import Header from '../../components/common/Header'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 
 function HeaderContainer() {
-  const { userInfo } = useSelector(({ user }) => ({
+  const { userInfo } = useAppSelector(({ user }) => ({
     userInfo: user.user,
   }))
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const onLogout = () => {
     dispatch(logout())
   }

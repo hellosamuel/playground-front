@@ -31,7 +31,7 @@ function* getAllPostsSaga(action: PayloadAction<PostsReadAllPostsPayload>) {
   yield put(finishLoading(readAllPosts.type))
 }
 
-function* getPostSaga(action: PayloadAction<number>) {
+function* getPostSaga(action: PayloadAction<string>) {
   yield put(startLoading(readPost.type))
 
   try {

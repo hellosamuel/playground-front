@@ -31,7 +31,7 @@ const slice = createSlice({
   name: 'post',
   initialState,
   reducers: {
-    readPost() {},
+    readPost(_state, _action: PayloadAction<string>) {},
     readPostSuccess(state, action: PayloadAction<PostReadPostResponse>) {
       state.post = action.payload.data
     },
@@ -48,7 +48,7 @@ export const POST = slice.name
 export const { readPost, readPostSuccess, readPostFailure, unloadPost } = slice.actions
 export default slice.reducer
 
-function* readPostSaga(action: PayloadAction<number>) {
+function* readPostSaga(action: PayloadAction<string>) {
   yield put(startLoading(readPost.type))
 
   try {

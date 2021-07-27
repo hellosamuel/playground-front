@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react'
-import { withRouter } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { readPost, unloadPost } from '../../modules/post'
 import PostViewer from '../../components/post/PostViewer'
 import PostActionButtons from '../../components/post/PostActionButtons'
 import { removePost } from '../../lib/api/posts'
 import { setOriginalPost } from '../../modules/write'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 
-function PostViewerContainer({ match, history }) {
+function PostViewerContainer({ match, history }: RouteComponentProps<{ postId: string }>) {
   const { postId } = match.params
-  const dispatch = useDispatch()
-  const { post, error, loading, userInfo } = useSelector(({ post, loading, user }) => ({
+  const dispatch = useAppDispatch()
+  const { post, error, loading, userInfo } = useAppSelector(({ post, loading, user }) => ({
     post: post.post,
     error: post.error,
     loading: loading['post/READ_POST'],
@@ -19,12 +19,16 @@ function PostViewerContainer({ match, history }) {
 
   useEffect(() => {
     dispatch(readPost(postId))
-    return () => dispatch(unloadPost())
+    return () => {
+      dispatch(unloadPost())
+    }
   }, [dispatch, postId])
 
   const onEdit = () => {
-    dispatch(setOriginalPost(post))
-    history.push('/posts/write')
+    if (post) {
+      dispatch(setOriginalPost(post))
+      history.push('/posts/write')
+    }
   }
 
   const onRemove = async () => {
@@ -37,6 +41,7 @@ function PostViewerContainer({ match, history }) {
   }
 
   const isOwner = (userInfo && userInfo.id) === (post && post.userId)
+
   return (
     <PostViewer
       post={post}

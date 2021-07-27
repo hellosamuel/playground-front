@@ -1,7 +1,7 @@
 /* eslint-disable react/no-danger */
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Post } from '../../modules/post'
+import { PostsState } from '../../modules/posts'
 
 const styles = {
   head: {
@@ -24,10 +24,9 @@ const styles = {
     },
   },
 }
-
 interface PostViewerProps {
-  post: Post
-  error: boolean
+  post: PostsState['post']
+  error: PostsState['error']
   loading: boolean
   actionButtons: false | JSX.Element
 }
@@ -47,8 +46,8 @@ function PostViewer({ post, error, loading, actionButtons }: PostViewerProps) {
       <div style={styles.head}>
         <h1 style={styles.title}>{title}</h1>
         <span style={styles.info}>
-          <Link to={`/posts/@${Author.username}`}>
-            <b>{Author.username}</b>
+          <Link to={`/posts/@${Author?.username}`}>
+            <b>{Author?.username}</b>
           </Link>
         </span>
         <span style={styles.info}>{new Date(createdAt).toLocaleDateString()}</span>

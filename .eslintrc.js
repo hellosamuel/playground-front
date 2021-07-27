@@ -53,5 +53,7 @@ module.exports = {
     'react/require-default-props': 'off',
     '@typescript-eslint/no-shadow': 'off',
     'import/no-cycle': 'off',
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    'no-console': 'off',
   },
 }

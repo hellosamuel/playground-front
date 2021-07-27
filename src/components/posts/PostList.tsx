@@ -37,11 +37,11 @@ function PostItem({ post }: { post: Post }) {
   return (
     <div style={styles.postItemBlock}>
       <h2 style={styles.title}>
-        <Link to={`/posts/@${Author.username}/${id}`}>{title}</Link>
+        <Link to={`/posts/@${Author?.username}/${id}`}>{title}</Link>
       </h2>
       <span>
         <b>
-          <Link to={`/posts/@${Author.username}`}>{Author.username}</Link>
+          <Link to={`/posts/@${Author?.username}`}>{Author?.username}</Link>
         </b>
       </span>
       <span style={styles.info}>{new Date(createdAt).toLocaleDateString()}</span>

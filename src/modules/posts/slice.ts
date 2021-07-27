@@ -18,7 +18,7 @@ const slice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    readAllPosts(state, action: PayloadAction<PostsReadAllPostsPayload>) {},
+    readAllPosts(_state, _action: PayloadAction<PostsReadAllPostsPayload>) {},
     readAllPostsSuccess(state, action: PayloadAction<PostsReadAllPostsResponse>) {
       state.posts = action.payload.data
       state.lastPage = parseInt(action.payload.headers['last-page'], 10)

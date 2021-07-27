@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios'
 import { Post } from '../post'
-import { WriteState } from './types'
+import { UpdatePostPayload, WritePostPayload, WriteState } from './types'
 
 const initialState: WriteState = {
   post: null,
@@ -25,7 +25,7 @@ const slice = createSlice({
       }
       state.originalPostId = post.id
     },
-    writePost(state) {
+    writePost(state, _action: PayloadAction<WritePostPayload>) {
       state.post = null
       state.postError = null
     },
@@ -35,7 +35,7 @@ const slice = createSlice({
     writePostFailure(state, { payload: error }: PayloadAction<AxiosError>) {
       state.postError = error
     },
-    updatePost() {},
+    updatePost(_state, _action: PayloadAction<UpdatePostPayload>) {},
     updatePostSuccess(state, { payload: post }: PayloadAction<Post>) {
       state.post = post
     },

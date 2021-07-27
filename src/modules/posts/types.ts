@@ -3,8 +3,8 @@ import { Post } from '../post'
 
 export interface PostsReadAllPostsPayload {
   username: string
-  tag: string | string[] | undefined
-  page: string | string[] | undefined
+  tag: string
+  page: string
 }
 
 export type PostsReadAllPostsResponse = AxiosResponse<Post[]>

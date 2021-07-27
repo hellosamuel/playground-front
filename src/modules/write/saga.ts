@@ -10,9 +10,8 @@ import {
   updatePostSuccess,
   updatePostFailure,
 } from './slice'
-import { UpdatePostResponse, WritePostPayload, WritePostResponse } from './types'
+import { UpdatePostPayload, UpdatePostResponse, WritePostPayload, WritePostResponse } from './types'
 import * as postsAPI from '../../lib/api/posts'
-import { Post } from '../post'
 
 function* writePostSaga(action: PayloadAction<WritePostPayload>) {
   yield put(startLoading(writePost.type))
@@ -27,7 +26,7 @@ function* writePostSaga(action: PayloadAction<WritePostPayload>) {
   yield put(finishLoading(writePost.type))
 }
 
-function* updatePostSaga(action: PayloadAction<Post>) {
+function* updatePostSaga(action: PayloadAction<UpdatePostPayload>) {
   yield put(startLoading(updatePost.type))
 
   try {

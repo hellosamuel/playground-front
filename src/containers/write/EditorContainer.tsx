@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
 import Editor from '../../components/write/Editor'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 import { initialize, updatePost, writePost } from '../../modules/write'
 
-function EditorContainer({ history }) {
-  const dispatch = useDispatch()
-  const { post, postError, postForEdit, originalPostId } = useSelector(({ write }) => ({
+function EditorContainer({ history }: RouteComponentProps) {
+  const dispatch = useAppDispatch()
+  const { post, postError, postForEdit, originalPostId } = useAppSelector(({ write }) => ({
     post: write.post,
     postError: write.postError,
     postForEdit: write.postForEdit,
@@ -23,7 +23,12 @@ function EditorContainer({ history }) {
     setWriteForm((prevForm) => ({ ...prevForm, [name]: value }))
   }, [])
 
-  useEffect(() => () => dispatch(initialize()), [dispatch])
+  useEffect(
+    () => () => {
+      dispatch(initialize())
+    },
+    [dispatch]
+  )
 
   const onPublish = () => {
     if (originalPostId) {
@@ -53,7 +58,7 @@ function EditorContainer({ history }) {
   useEffect(() => {
     if (post) {
       const { id, Author } = post
-      history.push(`/posts/@${Author.username}/${id}`)
+      history.push(`/posts/@${Author?.username}/${id}`)
     }
     if (postError) {
       console.error(postError)
