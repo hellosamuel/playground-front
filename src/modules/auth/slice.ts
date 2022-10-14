@@ -31,11 +31,11 @@ const slice = createSlice({
     },
     login(_state, _action: PayloadAction<AuthLoginPayload>) {},
     loginSuccess(state, action: PayloadAction<AuthLoginResponse>) {
-      state.authRegister = action.payload.data
+      state.authLogin = action.payload.data
       state.authError = null
     },
     loginFailure(state, action: PayloadAction<AxiosError>) {
-      state.authRegister = null
+      state.authLogin = null
       state.authError = action.payload
     },
   },
